@@ -1,0 +1,23 @@
+<script type="text/javascript">
+
+  let personaList = document.createElement('ul')
+
+
+  const myHeaders = new Headers()
+  myHeaders.append('authorization', `Bearer ${localStorage.token}`)
+
+  fetch('/api/persona',{
+    method:'GET',
+    headers:myHeaders
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    data.persones.map(persona =>{
+      let text = document.createTextNode(persona.nom)
+      let element = document.createElement('li')
+      element.appendChild(text)
+      personaList.appendChild(element)
+    })
+    document.body.appendChild(personaList)
+  })
+</script>
